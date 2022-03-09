@@ -11,8 +11,8 @@ module.exports = (app) => {
       });
   });
 
-  app.post("/animais", (req, res, next) => {
-    db.collection("animais").insertOne(req.body, (err, result) => {
+  app.post("/animais", (req, res) => {
+    db.collection("animais").insertOne(req.body, (err) => {
       if (err) throw err;
       res.json({ success: "Incluído com sucesso." });
     });
