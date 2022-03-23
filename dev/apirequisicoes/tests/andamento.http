@@ -1,0 +1,47 @@
+# Obter a lista de andamentos
+GET http://localhost:3000/api/andamento
+Content-Type: application/json
+###
+
+# Inserir novo andamento
+POST http://localhost:3000/api/andamento
+Content-Type: application/json
+
+{
+ "dataHora": "2022-02-25T17:32:25.000Z",
+ "titulo": "Sei la porra", 
+ "descricao": "é isso mesmoooo",
+ "agendaInicio": "2022-02-25T17:32:25.000Z",
+ "colaborador": "6231332704433aa1d5eb0e78",
+ "atividade": "623a660ced58e6368c0b0a92"
+}
+###
+
+# Alterar andamento
+PUT http://localhost:3000/api/andamento
+Content-Type: application/json
+
+{
+ "_id": "623a68bcfbb7189d7dfc6ad0",
+ "dataHora": "2022-02-25T17:32:25.000Z",
+ "titulo": "Sei la porra", 
+ "descricao": "é isso mesmoooo",
+ "agendaInicio": "2022-02-25T17:32:25.000Z",
+ "colaborador": "6231332704433aa1d5eb0e78",
+ "atividade": "623a660ced58e6368c0b0a92"
+}
+###
+# Excluir um andamento
+DELETE http://localhost:3000/api/andamento/623a5f9b6491048851c1b2f0
+Content-Type: application/json
+###
+
+# Obter pelo id de andamento
+GET http://localhost:3000/api/andamento/623a68bcfbb7189d7dfc6ad0
+Content-Type: application/json
+###
+
+# Obter andamentos filtrando
+GET http://localhost:3000/api/andamento/filtro/Nova
+Content-Type: application/json
+###

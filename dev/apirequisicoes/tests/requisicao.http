@@ -1,0 +1,48 @@
+# Obter a lista de requisições
+GET http://localhost:3000/api/requisicao
+Content-Type: application/json
+###
+
+# Inserir novo requisicao
+POST http://localhost:3000/api/requisicao
+Content-Type: application/json
+
+{
+ "titulo": "Nova requisição", 
+ "descricao": "requisição teste",
+ "dataHoraCriada": "2022-01-25T17:32:25.000Z",
+ "status": "OK",
+ "prazoAtendimento": "2022-02-25T17:32:25.000Z",
+ "tipoRequisicao": "623a5a86e632e1fefd8e730e",
+ "solicitante": "623a57b75d2ec4064fac715e"
+}
+###
+
+# Alterar requisicao
+PUT http://localhost:3000/api/requisicao
+Content-Type: application/json
+
+{
+ "_id": "623a5f9b6491048851c1b2f0",
+ "titulo": "Nova requisição", 
+ "descricao": "requisição teste",
+ "dataHoraCriada": "2022-01-25T17:32:25.000Z",
+ "status": "OK",
+ "prazoAtendimento": "2022-02-25T17:32:25.000Z",'
+ "tipoRequisicao": "623a5a86e632e1fefd8e730e"
+}
+###
+# Excluir um requisicao
+DELETE http://localhost:3000/api/requisicao/623a57b75d2ec4064fac715e
+Content-Type: application/json
+###
+
+# Obter pelo id de requisicao
+GET http://localhost:3000/api/requisicao/623a5fc26491048851c1b2f7
+Content-Type: application/json
+###
+
+# Obter requisições filtrando
+GET http://localhost:3000/api/requisicao/filtro/Nova
+Content-Type: application/json
+###

@@ -2,7 +2,6 @@ const { ObjectId } = require("mongodb");
 
 module.exports = (app) => {
   app.get("/colaborador", (req, res) => {
-    //res.send('retornar colaborador');
     db.collection("colaborador")
       .find()
       .toArray((err, results) => {

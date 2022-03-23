@@ -13,7 +13,7 @@ app.listen(port, () => {
   return console.log("API executando na porta " + port);
 });
 
-// usar o momgo
+// usar o mongo
 require("./src/server/db/mongo");
 
 // Usar as rotas

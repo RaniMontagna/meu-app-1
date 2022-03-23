@@ -1,0 +1,37 @@
+# Obter a lista de tipos de requisições
+GET http://localhost:3000/api/tipoRequisicao
+Content-Type: application/json
+###
+
+# Inserir novo tipo de requisição
+POST http://localhost:3000/api/tipoRequisicao
+Content-Type: application/json
+
+{
+ "descricao": "POST"
+}
+###
+
+# Alterar requisição
+PUT http://localhost:3000/api/tipoRequisicao
+Content-Type: application/json
+
+{
+ "_id": "623a5a56e632e1fefd8e7305",
+ "descricao": "GET"
+}
+###
+# Excluir um tipo de requisição
+DELETE http://localhost:3000/api/tipoRequisicao/623a5a56e632e1fefd8e7305
+Content-Type: application/json
+###
+
+# Obter pelo id do tipo de requisição
+GET http://localhost:3000/api/tipoRequisicao/623a5a86e632e1fefd8e730e
+Content-Type: application/json
+###
+
+# Obter requisições por filtro
+GET http://localhost:3000/api/tipoRequisicao/filtro/POST
+Content-Type: application/json
+###
