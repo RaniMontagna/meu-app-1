@@ -1,10 +1,12 @@
+@api = 'http://localhost:3000/api'
+
 # Obter a lista de andamentos
-GET http://localhost:3000/api/andamento
+GET {{api}}/andamento
 Content-Type: application/json
 ###
 
 # Inserir novo andamento
-POST http://localhost:3000/api/andamento
+POST {{api}}/andamento
 Content-Type: application/json
 
 {
@@ -18,7 +20,7 @@ Content-Type: application/json
 ###
 
 # Alterar andamento
-PUT http://localhost:3000/api/andamento
+PUT {{api}}/andamento
 Content-Type: application/json
 
 {
@@ -32,16 +34,16 @@ Content-Type: application/json
 }
 ###
 # Excluir um andamento
-DELETE http://localhost:3000/api/andamento/623a5f9b6491048851c1b2f0
+DELETE {{api}}/andamento/623a5f9b6491048851c1b2f0
 Content-Type: application/json
 ###
 
 # Obter pelo id de andamento
-GET http://localhost:3000/api/andamento/623a68bcfbb7189d7dfc6ad0
+GET {{api}}/andamento/623a68bcfbb7189d7dfc6ad0
 Content-Type: application/json
 ###
 
 # Obter andamentos filtrando
-GET http://localhost:3000/api/andamento/filtro/Nova
+GET {{api}}/andamento/filtro/Nova
 Content-Type: application/json
 ###

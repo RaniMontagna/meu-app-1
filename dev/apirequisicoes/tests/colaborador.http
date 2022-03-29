@@ -1,10 +1,12 @@
+@api = 'http://localhost:3000/api'
+
 # Obter a lista de colaboradores
-GET http://localhost:3000/api/colaborador
+GET {{api}}/colaborador
 Content-Type: application/json
 ###
 
 # Inserir novo colaborador
-POST http://localhost:3000/api/colaborador
+POST {{api}}/colaborador
 Content-Type: application/json
 
 {
@@ -15,7 +17,7 @@ Content-Type: application/json
 ###
 
 # Alterar colaborador
-PUT http://localhost:3000/api/colaborador
+PUT {{api}}/colaborador
 Content-Type: application/json
 
 {
@@ -26,16 +28,16 @@ Content-Type: application/json
 }
 ###
 # Excluir um colaborador
-DELETE http://localhost:3000/api/colaborador/623a510c72b34b08b610e1fb
+DELETE {{api}}/colaborador/623a510c72b34b08b610e1fb
 Content-Type: application/json
 ###
 
 # Obter pelo id de colaborador
-GET http://localhost:3000/api/colaborador/6231332704433aa1d5eb0e78
+GET {{api}}/colaborador/6231332704433aa1d5eb0e78
 Content-Type: application/json
 ###
 
 # Obter colaboradores filtrando
-GET http://localhost:3000/api/colaborador/filtro/Ranielli
+GET {{api}}/colaborador/filtro/Ranielli
 Content-Type: application/json
 ###

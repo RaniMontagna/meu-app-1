@@ -1,10 +1,12 @@
+@api = 'http://localhost:3000/api'
+
 # Obter a lista de tipos de requisições
-GET http://localhost:3000/api/tipoRequisicao
+GET {{api}}/tipoRequisicao
 Content-Type: application/json
 ###
 
 # Inserir novo tipo de requisição
-POST http://localhost:3000/api/tipoRequisicao
+POST {{api}}/tipoRequisicao
 Content-Type: application/json
 
 {
@@ -13,7 +15,7 @@ Content-Type: application/json
 ###
 
 # Alterar requisição
-PUT http://localhost:3000/api/tipoRequisicao
+PUT {{api}}/tipoRequisicao
 Content-Type: application/json
 
 {
@@ -22,16 +24,16 @@ Content-Type: application/json
 }
 ###
 # Excluir um tipo de requisição
-DELETE http://localhost:3000/api/tipoRequisicao/623a5a56e632e1fefd8e7305
+DELETE {{api}}/tipoRequisicao/623a5a56e632e1fefd8e7305
 Content-Type: application/json
 ###
 
 # Obter pelo id do tipo de requisição
-GET http://localhost:3000/api/tipoRequisicao/623a5a86e632e1fefd8e730e
+GET {{api}}/tipoRequisicao/623a5a86e632e1fefd8e730e
 Content-Type: application/json
 ###
 
 # Obter requisições por filtro
-GET http://localhost:3000/api/tipoRequisicao/filtro/POST
+GET {{api}}/tipoRequisicao/filtro/POST
 Content-Type: application/json
 ###
