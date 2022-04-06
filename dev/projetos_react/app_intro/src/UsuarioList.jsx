@@ -25,7 +25,7 @@ const UsuarioList = (props) => (
               <td>{o.email}</td>
               <td>{o.celular}</td>
               <td>
-                <button onClick={() => props.editar(o.id)} class="btn btn-primary btn-sm">
+                <button onClick={() => props.editar(o.id)} class="btn btn-warning btn-sm">
                   Editar
                 </button>
                 <button onClick={() => props.excluir(o.id)} class="btn btn-danger btn-sm">
