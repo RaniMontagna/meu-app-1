@@ -1,9 +1,20 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext } from 'react';
 
+import ColaboradoresContext from './colaboradoresContext';
 import useColaboradores from './useColaboradores';
+import { ConfirmDialog } from 'primereact/confirmdialog';
 
-const ColaboradoresList = ({ editando, setEditando }) => {
-  const { colaboradores, removerColaborador } = useColaboradores({ setEditando });
+const ColaboradoresList = () => {
+  const { setEditando } = useContext(ColaboradoresContext);
+  const { colaboradores, removerColaborador, buscarColaboradores } = useColaboradores();
+  const [confirmarExclusao, setConfirmarExclusao] = React.useState({ open: false });
+
+  React.useEffect(() => {
+    if (colaboradores.length === 0) {
+      buscarColaboradores();
+    }
+  }, []);
 
   return (
     <div>
@@ -32,7 +43,7 @@ const ColaboradoresList = ({ editando, setEditando }) => {
                   <button onClick={() => setEditando({ open: true, colaborador: o })} class="btn btn-warning btn-sm">
                     Editar
                   </button>
-                  <button onClick={() => removerColaborador(o._id)} class="btn btn-danger btn-sm">
+                  <button onClick={() => setConfirmarExclusao({ open: true, id: o._id })} class="btn btn-danger btn-sm">
                     Excluir
                   </button>
                 </td>
@@ -45,6 +56,16 @@ const ColaboradoresList = ({ editando, setEditando }) => {
           )}
         </tbody>
       </table>
+      {confirmarExclusao.open && (
+        <ConfirmDialog
+          visible={confirmarExclusao.open}
+          onHide={() => setConfirmarExclusao(false)}
+          message="Confirmar a exclusão?"
+          header="Confirmação"
+          icon="pi pi-question"
+          accept={() => removerColaborador(confirmarExclusao.id)}
+        />
+      )}
     </div>
   );
 };

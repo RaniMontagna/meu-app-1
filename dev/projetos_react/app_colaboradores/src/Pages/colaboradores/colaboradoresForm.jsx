@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import ColaboradoresContext from './colaboradoresContext';
 import useColaboradores from './useColaboradores';
 
-const ColaboradorForm = ({ editando, setEditando }) => {
-  const { adicionarColaborador, editarColaborador } = useColaboradores({ setEditando });
+const ColaboradorForm = () => {
+  const { editando, setEditando } = useContext(ColaboradoresContext);
+  const { adicionarColaborador, editarColaborador } = useColaboradores();
 
   const [colaborador, setColaborador] = React.useState({});
 

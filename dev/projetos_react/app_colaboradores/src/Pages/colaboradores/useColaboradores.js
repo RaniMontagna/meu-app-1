@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import api from '../../Services/api';
+import ColaboradoresContext from './colaboradoresContext';
 
-const useColaboradores = ({ setEditando }) => {
+const useColaboradores = () => {
   const [colaboradores, setColaboradores] = React.useState([]);
+  const { toastRef, setEditando } = useContext(ColaboradoresContext);
 
   // Busca colaboradores
-  const _buscarColaboradores = async () => {
+  const buscarColaboradores = async () => {
     try {
       const res = await api.get('/colaborador');
       if (res.data) {
         setColaboradores(res.data);
       }
     } catch (error) {
-      console.log('Erro ao buscar colaboradores');
+      toastRef.current.show({ severity: 'error', summary: 'Erro ao buscar colaboradores', life: 3000 });
     }
   };
 
@@ -22,9 +24,10 @@ const useColaboradores = ({ setEditando }) => {
       const { status } = await api.post('/colaborador', colaborador);
       if (status === 200) {
         setEditando({ open: false });
+        toastRef.current.show({ severity: 'success', summary: 'Colaborador adicionar com sucesso', life: 3000 });
       }
     } catch (error) {
-      alert('Erro ao adicionar colaborador');
+      toastRef.current.show({ severity: 'error', summary: 'Erro ao adicionar colaborador', life: 3000 });
     }
   };
 
@@ -33,10 +36,11 @@ const useColaboradores = ({ setEditando }) => {
     try {
       const { status } = await api.delete(`/colaborador/${id}`);
       if (status === 200) {
-        _buscarColaboradores();
+        buscarColaboradores();
+        toastRef.current.show({ severity: 'success', summary: 'Colaborador excluído com sucesso', life: 3000 });
       }
     } catch (error) {
-      alert('Erro ao remover colaborador');
+      toastRef.current.show({ severity: 'error', summary: 'Erro ao remover colaborador', life: 3000 });
     }
   };
 
@@ -46,22 +50,21 @@ const useColaboradores = ({ setEditando }) => {
       const { status } = await api.put(`/colaborador`, colaborador);
       if (status === 200) {
         setEditando({ open: false });
-        _buscarColaboradores();
+        buscarColaboradores();
+        toastRef.current.show({ severity: 'success', summary: 'Colaborador editado com sucesso', life: 3000 });
       }
     } catch (error) {
-      alert('Erro ao editar colaborador');
+      toastRef.current.show({ severity: 'error', summary: 'Erro ao editar colaborador', life: 3000 });
     }
   };
-
-  React.useEffect(() => {
-    _buscarColaboradores();
-  }, []);
 
   return {
     colaboradores,
     adicionarColaborador,
     removerColaborador,
     editarColaborador,
+    buscarColaboradores,
+    toastRef,
   };
 };
 
