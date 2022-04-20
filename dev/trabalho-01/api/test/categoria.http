@@ -1,0 +1,32 @@
+@api = http://localhost:3000/api/categoria
+
+# Obter a lista de categoria
+GET {{api}}
+Content-Type: application/json
+###
+
+# Inserir novo categoria
+POST {{api}}
+Content-Type: application/json
+
+{
+ "titulo": "Pru",
+ "descricao": "irineu"
+}
+###
+
+# Alterar um categoria
+PUT {{api}}
+Content-Type: application/json
+
+{
+ "_id": "625f47a2e2cfa5c1954c1457",
+ "titulo": "A fazer",
+ "descricao": "Tarefas que estão listadas e estão pendentes"
+}
+###
+
+# Excluir um categoria pelo id
+DELETE {{api}}/625f475ee2cfa5c1954c1450
+Content-Type: application/json
+###

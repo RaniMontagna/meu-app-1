@@ -1,0 +1,32 @@
+@api = http://localhost:3000/api/responsavel
+
+# Obter a lista de responsavel
+GET {{api}}
+Content-Type: application/json
+###
+
+# Inserir novo responsavel
+POST {{api}}
+Content-Type: application/json
+
+{
+ "nome": "Bernardinho",
+ "email": "182715@upf.br"
+}
+###
+
+# Alterar um responsavel
+PUT {{api}}
+Content-Type: application/json
+
+{
+ "_id": "625f49cb8a4f190ad6c1713e",
+ "nome": "Bernardo",
+ "email": "182715@upf.br"
+}
+###
+
+# Excluir um responsavel pelo id
+DELETE {{api}}/625f49bf8a4f190ad6c17138
+Content-Type: application/json
+###
