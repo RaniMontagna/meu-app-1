@@ -10,8 +10,8 @@ POST {{api}}
 Content-Type: application/json
 
 {
- "titulo": "Pru",
- "descricao": "irineu"
+ "titulo": "Concluído",
+ "descricao": "Teste"
 }
 ###
 
@@ -28,5 +28,10 @@ Content-Type: application/json
 
 # Excluir um categoria pelo id
 DELETE {{api}}/625f475ee2cfa5c1954c1450
+Content-Type: application/json
+###
+
+# Obter pelo id de categoria
+GET {{api}}/625f47a2e2cfa5c1954c1457
 Content-Type: application/json
 ###

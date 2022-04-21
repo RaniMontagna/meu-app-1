@@ -1,0 +1,16 @@
+.tableCell {
+  color: #ffffff !important;
+  font-size: 18px !important;
+}
+
+.divTable {
+  padding: 32px;
+  overflow-y: auto;
+  height: calc(100% - 124px);
+}
+
+.divAbsolute {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+}

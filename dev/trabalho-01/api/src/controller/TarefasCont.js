@@ -29,4 +29,14 @@ module.exports = {
       err ? res.status(400).send(err) : res.status(200).json('message:ok');
     });
   },
+
+  obterPeloId: async (req, res) => {
+    Tarefas.findOne({ _id: req.params.id }, function (err, obj) {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).json(obj);
+      }
+    });
+  },
 };

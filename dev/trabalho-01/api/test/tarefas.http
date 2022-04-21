@@ -35,3 +35,8 @@ Content-Type: application/json
 DELETE {{api}}/625f4c687f6697ff9da57eeb
 Content-Type: application/json
 ###
+
+# Obter pelo id de tarefas
+GET {{api}}/625f4c8110191630230eecff
+Content-Type: application/json
+###

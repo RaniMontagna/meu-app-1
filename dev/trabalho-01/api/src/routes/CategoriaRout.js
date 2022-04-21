@@ -6,5 +6,6 @@ routes.route('/categoria').get(controle.listar);
 routes.route('/categoria').post(controle.incluir);
 routes.route('/categoria').put(controle.alterar);
 routes.route('/categoria/:id').delete(controle.excluir);
+routes.route('/categoria/:id').get(controle.obterPeloId);
 
 module.exports = routes;

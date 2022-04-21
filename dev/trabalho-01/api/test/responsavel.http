@@ -30,3 +30,8 @@ Content-Type: application/json
 DELETE {{api}}/625f49bf8a4f190ad6c17138
 Content-Type: application/json
 ###
+
+# Obter pelo id de responsavel
+GET {{api}}/625f49cb8a4f190ad6c1713e
+Content-Type: application/json
+###
