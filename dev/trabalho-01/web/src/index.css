@@ -6,5 +6,7 @@ body {
 }
 
 * {
-  color: #EFF1F3;
+  margin: 0;
+  padding: 0;
+  user-select: none;
 }
