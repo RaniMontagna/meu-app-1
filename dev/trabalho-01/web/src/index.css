@@ -9,3 +9,21 @@ body {
   user-select: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+
+  @media (max-width: 576px) {
+    width: 5px;
+  }
+}
+::-webkit-scrollbar-track {
+  background: #272727; 
+}
+::-webkit-scrollbar-thumb {
+  background: #32323290;
+  border-radius: 100px; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #323232; 
+}

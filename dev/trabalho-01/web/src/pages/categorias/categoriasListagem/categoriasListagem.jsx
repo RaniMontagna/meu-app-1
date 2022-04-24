@@ -1,19 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
 import { useCategoriasListagem } from './useCategoriasListagem';
 import DataTable from '../../../components/dataTable/dataTable';
 import { MdOutlineEdit, MdOutlineCancel, MdAdd } from 'react-icons/md';
 
 import AdicionarEditarDialog from '../dialog/adicionarEditarDialog/adicionarEditarDialog';
+import ExcluirDialog from '../dialog/excluirDialog/excluirDialog';
+import useCategorias from '../../../hooks/useListagem';
 
 const CategoriasListagem = () => {
-  const { listarCategorias, data } = useCategoriasListagem();
-
-  const [adicionarEditarDialog, setAdicionarEditarDialog] = useState({ open: false });
+  const { listarCategorias } = useCategoriasListagem();
+  const {
+    setAdicionarEditarDialog,
+    setExcluirDialog,
+    adicionarEditarDialog,
+    excluirDialog,
+    data,
+  } = useCategorias();
 
   React.useEffect(() => {
-    listarCategorias();
+    if (data === null) {
+      listarCategorias();
+    }
   }, []);
 
   const columns = ['Titulo', 'Descrição'];
@@ -28,16 +37,17 @@ const CategoriasListagem = () => {
             {
               label: 'Editar',
               icon: <MdOutlineEdit size={16} />,
-              action: () => {
-                setAdicionarEditarDialog({ open: true, codigo: it._id });
-              },
+              action: () => setAdicionarEditarDialog({ open: true, codigo: it._id }),
             },
             {
               label: 'Excluir',
               icon: <MdOutlineCancel size={16} />,
-              action: () => {
-                console.log('entrou', it._id);
-              },
+              action: () =>
+                setExcluirDialog({
+                  open: true,
+                  codigo: it._id,
+                  titulo: it.titulo,
+                }),
             },
           ],
         };
@@ -57,12 +67,8 @@ const CategoriasListagem = () => {
           onClick: () => setAdicionarEditarDialog({ open: true }),
         }}
       />
-      {adicionarEditarDialog?.open && (
-        <AdicionarEditarDialog
-          adicionarEditarDialog={adicionarEditarDialog}
-          setAdicionarEditarDialog={setAdicionarEditarDialog}
-        />
-      )}
+      {adicionarEditarDialog?.open && <AdicionarEditarDialog />}
+      {excluirDialog?.open && <ExcluirDialog />}
     </>
   );
 };

@@ -1,21 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, TextField } from '@mui/material';
 import React from 'react';
-// import { useCategoriasListagem } from '../../categoriasListagem/useCategoriasListagem';
+import { useForm } from 'react-hook-form';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from '@mui/material';
+import { useCategoriasListagem } from '../../categoriasListagem/useCategoriasListagem';
+import useCategorias from '../../../../hooks/useListagem';
+import useAdicionarEditarDialog from './useAdicionarEditarDialog';
 
-const AdicionarEditarDialog = ({ adicionarEditarDialog, setAdicionarEditarDialog }) => {
-  // const { buscarCategoriaPorId } = useCategoriasListagem();
+const AdicionarEditarDialog = () => {
+  const { buscarCategoriaPorId } = useCategoriasListagem();
+  const { register, handleSubmit, setValue } = useForm();
+  const { adicionarEditarDialog } = useCategorias();
 
-  const _handleClose = () => {
-    setAdicionarEditarDialog({ open: false });
-  };
-  const _handleSubmit = (values) => {
-    _handleClose();
-  };
+  const { onSubmit, handleClose } = useAdicionarEditarDialog();
 
   const _buscarCategoriaPorId = async (id) => {
-    // const res = await buscarCategoriaPorId(id);
-    //TODO: fazer lógica para colocar valores no form
+    const { titulo, descricao } = await buscarCategoriaPorId(id);
+    setValue('titulo', titulo);
+    setValue('descricao', descricao);
   };
 
   React.useEffect(() => {
@@ -25,23 +33,26 @@ const AdicionarEditarDialog = ({ adicionarEditarDialog, setAdicionarEditarDialog
   }, [adicionarEditarDialog]);
 
   return (
-    <FormControl>
-      <Dialog open={adicionarEditarDialog.open} onClose={_handleClose}>
-        <DialogTitle>Adicionar categoria</DialogTitle>
+    <Dialog open={adicionarEditarDialog.open} onClose={handleClose}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <DialogTitle>
+          {adicionarEditarDialog.codigo ? 'Editar categoria' : 'Adicionar categoria'}
+        </DialogTitle>
         <DialogContent>
           <TextField
+            {...register('titulo')}
             autoFocus
             margin="dense"
-            id="titulo"
             label="Titulo"
             type="text"
             fullWidth
             variant="filled"
             autoComplete="off"
+            required
           />
           <TextField
+            {...register('descricao')}
             margin="dense"
-            id="descricao"
             label="Descrição"
             type="text"
             fullWidth
@@ -50,15 +61,15 @@ const AdicionarEditarDialog = ({ adicionarEditarDialog, setAdicionarEditarDialog
           />
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" onClick={_handleClose}>
+          <Button variant="outlined" onClick={handleClose}>
             Cancelar
           </Button>
-          <Button variant="contained" onClick={_handleSubmit}>
+          <Button variant="contained" type="submit">
             Salvar
           </Button>
         </DialogActions>
-      </Dialog>
-    </FormControl>
+      </form>
+    </Dialog>
   );
 };
 

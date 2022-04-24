@@ -1,10 +1,10 @@
-import React from 'react';
 import useGlobal from '../../../hooks/useGlobal';
+import useCategorias from '../../../hooks/useListagem';
 import api from '../../../services/api';
 
 export const useCategoriasListagem = () => {
-  const { toggleLoading, handleErrors } = useGlobal();
-  const [data, setData] = React.useState(null);
+  const { toggleLoading, handleErrors, toggleNotificacao } = useGlobal();
+  const { setData } = useCategorias();
 
   const listarCategorias = async () => {
     toggleLoading(true);
@@ -12,6 +12,7 @@ export const useCategoriasListagem = () => {
       const res = await api.get('/categoria');
       if (res.data) {
         toggleLoading(false);
+
         setData(res.data);
       }
     } catch (error) {
@@ -25,7 +26,10 @@ export const useCategoriasListagem = () => {
       const { status } = await api.post('/categoria', categoria);
       if (status === 200) {
         toggleLoading(false);
-        // TODO: criar lógica de adicionar categoria
+        toggleNotificacao({
+          mensagem: 'Categoria adicionada com sucesso.',
+        });
+        listarCategorias();
       }
     } catch (error) {
       handleErrors(error);
@@ -38,7 +42,10 @@ export const useCategoriasListagem = () => {
       const { status } = await api.put('/categoria', categoria);
       if (status === 200) {
         toggleLoading(false);
-        // TODO: criar lógica de editar categoria
+        toggleNotificacao({
+          mensagem: 'Categoria editada com sucesso.',
+        });
+        listarCategorias();
       }
     } catch (error) {
       handleErrors(error);
@@ -51,7 +58,10 @@ export const useCategoriasListagem = () => {
       const { status } = await api.delete(`/categoria/${id}`);
       if (status === 200) {
         toggleLoading(false);
-        // TODO: criar lógica de deletar categoria
+        toggleNotificacao({
+          mensagem: 'Categoria excluída com sucesso.',
+        });
+        listarCategorias();
       }
     } catch (error) {
       handleErrors(error);
@@ -72,7 +82,6 @@ export const useCategoriasListagem = () => {
   };
 
   return {
-    data,
     listarCategorias,
     buscarCategoriaPorId,
     adicionarCategoria,

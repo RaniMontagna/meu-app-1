@@ -3,6 +3,10 @@
   font-size: 18px !important;
 }
 
+.border {
+  border-color: #555555 !important;
+}
+
 .divTable {
   padding: 32px;
   overflow-y: auto;

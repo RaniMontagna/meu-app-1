@@ -28,10 +28,18 @@ const DataTable = ({ columns, rows, fab }) => {
           {rows?.map((it) => {
             return (
               <TableRow key={Math.random()}>
-                <TableCell className="tableCell">{it.titulo}</TableCell>
-                <TableCell className="tableCell">{it.descricao}</TableCell>
+                {Object.values(it).map((values) => {
+                  if (typeof values === 'string') {
+                    return (
+                      <TableCell key={Math.random()} className="tableCell border">
+                        {values}
+                      </TableCell>
+                    );
+                  }
+                  return null;
+                })}
                 {it.actions && (
-                  <TableCell className="tableCell" align="right">
+                  <TableCell className="tableCell border" align="right">
                     <Actions actions={it.actions} />
                   </TableCell>
                 )}

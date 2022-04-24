@@ -18,8 +18,8 @@ const Actions = ({ actions }) => {
 
   return (
     <>
-      <div style={{ paddingRight: 4, paddingTop: 4 }}>
-        <MdOutlineMenuOpen style={{ cursor: 'pointer' }} onClick={handleClick} size={32} />
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '0 8px 0 0' }}>
+        <MdOutlineMenuOpen style={{ cursor: 'pointer' }} onClick={handleClick} size={28} />
       </div>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose} className="menu">
         {actions.map((it) => {
