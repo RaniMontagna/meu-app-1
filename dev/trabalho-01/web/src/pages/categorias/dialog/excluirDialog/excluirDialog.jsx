@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useCategoriasListagem } from '../../categoriasListagem/useCategoriasListagem';
-import useCategorias from '../../../../hooks/useListagem';
+import useCategorias from '../../../../hooks/useCategorias';
 
 const ExcluirDialog = () => {
   const { deletarCategoria } = useCategoriasListagem();

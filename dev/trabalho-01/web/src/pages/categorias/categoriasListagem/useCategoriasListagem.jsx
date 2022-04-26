@@ -1,5 +1,5 @@
 import useGlobal from '../../../hooks/useGlobal';
-import useCategorias from '../../../hooks/useListagem';
+import useCategorias from '../../../hooks/useCategorias';
 import api from '../../../services/api';
 
 export const useCategoriasListagem = () => {

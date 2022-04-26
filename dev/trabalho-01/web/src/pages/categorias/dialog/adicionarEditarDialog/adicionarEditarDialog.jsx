@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material';
 import { useCategoriasListagem } from '../../categoriasListagem/useCategoriasListagem';
-import useCategorias from '../../../../hooks/useListagem';
+import useCategorias from '../../../../hooks/useCategorias';
 import useAdicionarEditarDialog from './useAdicionarEditarDialog';
 
 const AdicionarEditarDialog = () => {

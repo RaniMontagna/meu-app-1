@@ -7,7 +7,7 @@ import { MdOutlineEdit, MdOutlineCancel, MdAdd } from 'react-icons/md';
 
 import AdicionarEditarDialog from '../dialog/adicionarEditarDialog/adicionarEditarDialog';
 import ExcluirDialog from '../dialog/excluirDialog/excluirDialog';
-import useCategorias from '../../../hooks/useListagem';
+import useCategorias from '../../../hooks/useCategorias';
 
 const CategoriasListagem = () => {
   const { listarCategorias } = useCategoriasListagem();

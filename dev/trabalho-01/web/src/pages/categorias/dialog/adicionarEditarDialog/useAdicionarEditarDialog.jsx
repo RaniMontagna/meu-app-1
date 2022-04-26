@@ -1,4 +1,4 @@
-import useCategorias from '../../../../hooks/useListagem';
+import useCategorias from '../../../../hooks/useCategorias';
 import { useCategoriasListagem } from '../../categoriasListagem/useCategoriasListagem';
 
 const useAdicionarEditarDialog = () => {

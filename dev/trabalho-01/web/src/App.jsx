@@ -6,12 +6,15 @@ import { tema } from './themes/tema';
 
 import { CategoriasProvider } from './store/categorias/categoriasContext';
 import { ResponsaveisProvider } from './store/responsaveis/responsaveisContext';
+import { TarefasProvider } from './store/tarefas/tarefasContext';
 
 const Providers = ({ children }) => {
   return (
     <GlobalProvider>
       <CategoriasProvider>
-        <ResponsaveisProvider>{children}</ResponsaveisProvider>
+        <ResponsaveisProvider>
+          <TarefasProvider>{children}</TarefasProvider>
+        </ResponsaveisProvider>
       </CategoriasProvider>
     </GlobalProvider>
   );
