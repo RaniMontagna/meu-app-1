@@ -30,19 +30,37 @@ const ColaboradorForm = () => {
 
   return (
     <form>
-      <div class="form-group">
+      <div className="form-group">
         <label>Nome</label>
-        <input class="form-control" type="text" name="nome" value={colaborador.nome} onChange={_handleInputChange} />
+        <input
+          className="form-control"
+          type="text"
+          name="nome"
+          value={colaborador.nome}
+          onChange={_handleInputChange}
+        />
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <label>Email</label>
-        <input class="form-control" type="text" name="email" value={colaborador.email} onChange={_handleInputChange} />
+        <input
+          className="form-control"
+          type="text"
+          name="email"
+          value={colaborador.email}
+          onChange={_handleInputChange}
+        />
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <label>Senha</label>
-        <input class="form-control" type="text" name="senha" value={colaborador.senha} onChange={_handleInputChange} />
+        <input
+          className="form-control"
+          type="text"
+          name="senha"
+          value={colaborador.senha}
+          onChange={_handleInputChange}
+        />
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <button type="button" onClick={_handleSubmit} className="btn btn-primary btn-sm">
           Salvar
         </button>

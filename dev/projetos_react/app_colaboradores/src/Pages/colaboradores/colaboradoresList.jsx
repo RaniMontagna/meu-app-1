@@ -19,7 +19,7 @@ const ColaboradoresList = () => {
   return (
     <div>
       <h4>Listagem de colaboradores</h4>
-      <button type="button" class="btn btn-primary btn-sm" onClick={() => setEditando({ open: true })}>
+      <button type="button" className="btn btn-primary btn-sm" onClick={() => setEditando({ open: true })}>
         Inserir
       </button>
       <table className="table">
@@ -40,10 +40,16 @@ const ColaboradoresList = () => {
                 <td>{o.email}</td>
                 <td>{o.senha}</td>
                 <td>
-                  <button onClick={() => setEditando({ open: true, colaborador: o })} class="btn btn-warning btn-sm">
+                  <button
+                    onClick={() => setEditando({ open: true, colaborador: o })}
+                    className="btn btn-warning btn-sm"
+                  >
                     Editar
                   </button>
-                  <button onClick={() => setConfirmarExclusao({ open: true, id: o._id })} class="btn btn-danger btn-sm">
+                  <button
+                    onClick={() => setConfirmarExclusao({ open: true, id: o._id })}
+                    className="btn btn-danger btn-sm"
+                  >
                     Excluir
                   </button>
                 </td>
