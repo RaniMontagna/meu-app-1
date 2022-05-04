@@ -7,30 +7,44 @@ import 'primeicons/primeicons.css';
 
 import Loading from './Components/loading/loading';
 import { Menubar } from 'primereact/menubar';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 
 function App() {
   const Colaboradores = lazy(() => import('./Pages/colaboradores/colaboradores'));
   const Home = lazy(() => import('./Pages/home/home'));
 
+  return (
+    <BrowserRouter>
+      <div>
+        <Nav />
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/colaboradores" element={<Colaboradores />} />
+          </Routes>
+        </Suspense>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+const Nav = () => {
+  const navigate = useNavigate();
+
   const items = [
     {
       label: 'Home',
       icon: 'pi pi-fw pi-home',
-      command: () => {
-        window.location = '/';
-      },
+      command: () => navigate('/'),
     },
     {
       label: 'Cadastro',
       icon: 'pi pi-fw pi-file',
       items: [
         {
-          label: 'Usuários',
+          label: 'Colaboradores',
           icon: 'pi pi-fw pi-user',
-          command: () => {
-            window.location = '/usuarios';
-          },
+          command: () => navigate('/colaboradores'),
         },
       ],
     },
@@ -40,19 +54,7 @@ function App() {
     },
   ];
 
-  return (
-    <BrowserRouter>
-      <div>
-        <Menubar model={items} />
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/usuarios" element={<Colaboradores />} />
-          </Routes>
-        </Suspense>
-      </div>
-    </BrowserRouter>
-  );
-}
+  return <Menubar model={items} />;
+};
 
 export default App;

@@ -10,7 +10,7 @@ const Colaboradores = () => {
   const { toastRef, editando, setEditando } = useContext(ColaboradoresContext);
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <Toast ref={toastRef} />
       <h1>Colaboradores</h1>
       {!editando.open ? (

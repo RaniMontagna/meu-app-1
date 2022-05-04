@@ -18,7 +18,7 @@ const ColaboradoresList = () => {
 
   return (
     <div>
-      <h4>Listagem de colaboradores</h4>
+      <h4 style={{ fontWeight: '300' }}>Listagem de colaboradores</h4>
       <button type="button" className="btn btn-primary btn-sm" onClick={() => setEditando({ open: true })}>
         Inserir
       </button>
@@ -57,7 +57,7 @@ const ColaboradoresList = () => {
             ))
           ) : (
             <tr>
-              <td colSpan={3}>Nenhum colaborador.</td>
+              <td colSpan={4}>Nenhum colaborador encontrado.</td>
             </tr>
           )}
         </tbody>
