@@ -1,23 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import ColaboradoresList from './colaboradoresList';
-import ColaboradorForm from './colaboradoresForm';
-import ColaboradoresContext, { ColaboradoresProvider } from './colaboradoresContext';
-
-import { Toast } from 'primereact/toast';
+import { ColaboradoresProvider } from '../../Context/colaboradoresContext';
+import ColaboradoresDataTable from './colaboradoresDataTable/colaboradoresDataTable';
 
 const Colaboradores = () => {
-  const { toastRef, editando, setEditando } = useContext(ColaboradoresContext);
-
   return (
     <div style={{ textAlign: 'center' }}>
-      <Toast ref={toastRef} />
       <h1>Colaboradores</h1>
-      {!editando.open ? (
-        <ColaboradoresList editando={editando} setEditando={setEditando} />
-      ) : (
-        <ColaboradorForm editando={editando} setEditando={setEditando} />
-      )}
+      <ColaboradoresDataTable />
     </div>
   );
 };

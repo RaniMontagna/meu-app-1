@@ -6,8 +6,9 @@ import 'primereact/resources/primereact.min.css'; //core css
 import 'primeicons/primeicons.css';
 
 import Loading from './Components/loading/loading';
-import { Menubar } from 'primereact/menubar';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import Navigation from './Components/navigation/navigation';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AppProvider } from './Context/appContext';
 
 function App() {
   const Colaboradores = lazy(() => import('./Pages/colaboradores/colaboradores'));
@@ -15,46 +16,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <Nav />
+      <AppProvider>
+        <Navigation />
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/colaboradores" element={<Colaboradores />} />
           </Routes>
         </Suspense>
-      </div>
+      </AppProvider>
     </BrowserRouter>
   );
 }
-
-const Nav = () => {
-  const navigate = useNavigate();
-
-  const items = [
-    {
-      label: 'Home',
-      icon: 'pi pi-fw pi-home',
-      command: () => navigate('/'),
-    },
-    {
-      label: 'Cadastro',
-      icon: 'pi pi-fw pi-file',
-      items: [
-        {
-          label: 'Colaboradores',
-          icon: 'pi pi-fw pi-user',
-          command: () => navigate('/colaboradores'),
-        },
-      ],
-    },
-    {
-      label: 'Sair',
-      icon: 'pi pi-fw pi-power-off',
-    },
-  ];
-
-  return <Menubar model={items} />;
-};
 
 export default App;

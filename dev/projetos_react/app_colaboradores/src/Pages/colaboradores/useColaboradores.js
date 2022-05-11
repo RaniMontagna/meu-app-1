@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
+import AppContext from '../../Context/appContext';
 import api from '../../Services/api';
-import ColaboradoresContext from './colaboradoresContext';
+import ColaboradoresContext from '../../Context/colaboradoresContext';
 
 const useColaboradores = () => {
   const [colaboradores, setColaboradores] = React.useState([]);
-  const { toastRef, setEditando } = useContext(ColaboradoresContext);
+  const { setEditando } = useContext(ColaboradoresContext);
+  const { toastRef } = useContext(AppContext);
 
   // Busca colaboradores
   const buscarColaboradores = async () => {
