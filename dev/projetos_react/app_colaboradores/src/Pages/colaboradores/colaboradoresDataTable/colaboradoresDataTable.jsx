@@ -11,8 +11,8 @@ import { HeaderWithSearch } from './colaboradoresDataTable.static';
 import AdicionarEditarColaborador from '../dialogs/adicionarEditarColaborador';
 
 export const ColaboradoresDataTable = () => {
-  const { filtrosDataTable } = useColaboradoresContext();
-  const { colaboradores, buscarColaboradores, removerColaborador } = useColaboradores();
+  const { filtrosDataTable, colaboradores } = useColaboradoresContext();
+  const { buscarColaboradores, removerColaborador } = useColaboradores();
 
   const [confirmarExclusao, setConfirmarExclusao] = useState({ open: false });
   const [adicionarEditarColaborador, setAdicionarEditarColaborador] = useState({ open: false });

@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
-import AppContext from '../../Context/appContext';
 import api from '../../Services/api';
-import ColaboradoresContext from '../../Context/colaboradoresContext';
+import useApp from '../../Hooks/useApp';
+import useColaboradores from '../../Hooks/useColaboradores';
 
-const useColaboradores = () => {
-  const [colaboradores, setColaboradores] = React.useState([]);
-  const { setEditando } = useContext(ColaboradoresContext);
-  const { toastRef } = useContext(AppContext);
+const useColaboradoresHook = () => {
+  const { toastRef } = useApp();
+  const { setColaboradores } = useColaboradores();
 
   // Busca colaboradores
   const buscarColaboradores = async () => {
@@ -21,11 +19,12 @@ const useColaboradores = () => {
   };
 
   // Adicionar colaborador
-  const adicionarColaborador = async (colaborador) => {
+  const adicionarColaborador = async (colaborador, callBackSucesso) => {
     try {
       const { status } = await api.post('/colaborador', colaborador);
       if (status === 200) {
-        setEditando({ open: false });
+        callBackSucesso();
+        buscarColaboradores();
         toastRef.current.show({ severity: 'success', summary: 'Colaborador adicionar com sucesso', life: 3000 });
       }
     } catch (error) {
@@ -47,11 +46,11 @@ const useColaboradores = () => {
   };
 
   // Editar colaborador
-  const editarColaborador = async (colaborador) => {
+  const editarColaborador = async (colaborador, callBackSucesso) => {
     try {
       const { status } = await api.put(`/colaborador`, colaborador);
       if (status === 200) {
-        setEditando({ open: false });
+        callBackSucesso();
         buscarColaboradores();
         toastRef.current.show({ severity: 'success', summary: 'Colaborador editado com sucesso', life: 3000 });
       }
@@ -61,7 +60,6 @@ const useColaboradores = () => {
   };
 
   return {
-    colaboradores,
     adicionarColaborador,
     removerColaborador,
     editarColaborador,
@@ -70,4 +68,4 @@ const useColaboradores = () => {
   };
 };
 
-export default useColaboradores;
+export default useColaboradoresHook;

@@ -19,6 +19,21 @@ const Navigation = () => {
           icon: 'pi pi-fw pi-user',
           command: () => navigate('/colaboradores'),
         },
+        {
+          label: 'Solicitantes',
+          icon: 'pi pi-fw pi-user',
+          command: () => navigate('/solicitantes'),
+        },
+        {
+          label: 'Tipo de Requisição',
+          icon: 'pi pi-fw pi-user',
+          command: () => navigate('/tipoRequisicao'),
+        },
+        {
+          label: 'Requisição',
+          icon: 'pi pi-fw pi-user',
+          command: () => navigate('/requisicao'),
+        },
       ],
     },
     {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import useColaboradores from '../useColaboradores';
@@ -19,14 +19,16 @@ export const AdicionarEditarColaborador = ({ adicionarEditarColaborador, setAdic
     setColaborador({ ...colaborador, [name]: value });
   };
 
+  const callBackSucesso = useCallback(() => {
+    setAdicionarEditarColaborador({ open: false });
+  }, [setAdicionarEditarColaborador]);
+
   const _handleSubmit = () => {
     if (adicionarEditarColaborador.colaborador) {
-      editarColaborador({ _id: adicionarEditarColaborador.colaborador._id, ...colaborador });
+      editarColaborador({ _id: adicionarEditarColaborador.colaborador._id, ...colaborador }, callBackSucesso);
     } else {
-      adicionarColaborador(colaborador);
+      adicionarColaborador(colaborador, callBackSucesso);
     }
-
-    setAdicionarEditarColaborador({ open: false });
   };
 
   return (
@@ -74,7 +76,7 @@ export const AdicionarEditarColaborador = ({ adicionarEditarColaborador, setAdic
             onClick={() => setAdicionarEditarColaborador({ open: false })}
             className="p-button-text"
           />
-          <Button label="Confirmar" icon="pi pi-check" onClick={_handleSubmit} autoFocus />
+          <Button label="Confirmar" icon="pi pi-check" type="button" onClick={_handleSubmit} autoFocus />
         </div>
       </form>
     </Dialog>
