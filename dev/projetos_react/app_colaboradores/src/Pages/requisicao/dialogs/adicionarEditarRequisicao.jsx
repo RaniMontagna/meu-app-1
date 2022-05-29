@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import moment from 'moment';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
@@ -40,6 +41,9 @@ export const AdicionarEditarRequisicao = ({ adicionarEditarRequisicao, setAdicio
 
   const _handleInputChange = (event) => {
     const { name, value } = event.target;
+
+    console.log(event.target?.value);
+
     setRequisicao({ ...requisicao, [name]: value });
   };
 
@@ -55,6 +59,11 @@ export const AdicionarEditarRequisicao = ({ adicionarEditarRequisicao, setAdicio
     }
   };
 
+  const _formatDate = (data) => {
+    const dataFormatada = moment(data).utc().format('YYYY-MM-DDTHH:mm');
+    return dataFormatada;
+  };
+
   return (
     <Dialog
       header="Adicionar Requisições"
@@ -68,7 +77,7 @@ export const AdicionarEditarRequisicao = ({ adicionarEditarRequisicao, setAdicio
           <input
             className="form-control"
             type="text"
-            name="nome"
+            name="titulo"
             value={requisicao.titulo}
             onChange={_handleInputChange}
           />
@@ -83,13 +92,13 @@ export const AdicionarEditarRequisicao = ({ adicionarEditarRequisicao, setAdicio
             onChange={_handleInputChange}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column' }}>
           <label>Data de criação</label>
           <input
             className="form-control"
-            type="text"
+            type="datetime-local"
             name="dataHoraCriada"
-            value={requisicao.dataHoraCriada}
+            value={requisicao.prazoAtendimento && _formatDate(requisicao.dataHoraCriada)}
             onChange={_handleInputChange}
           />
         </div>
@@ -107,9 +116,9 @@ export const AdicionarEditarRequisicao = ({ adicionarEditarRequisicao, setAdicio
           <label>Prazo de atendimento</label>
           <input
             className="form-control"
-            type="text"
+            type="datetime-local"
             name="prazoAtendimento"
-            value={requisicao.prazoAtendimento}
+            value={requisicao.prazoAtendimento && _formatDate(requisicao.prazoAtendimento)}
             onChange={_handleInputChange}
           />
         </div>

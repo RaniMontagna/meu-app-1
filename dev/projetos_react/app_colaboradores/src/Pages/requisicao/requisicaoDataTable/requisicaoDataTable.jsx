@@ -9,6 +9,7 @@ import useRequisicao from '../useRequisicao';
 import useRequisicaoContext from '../../../Hooks/useRequisicao';
 import { HeaderWithSearch } from './requisicaoDataTable.static';
 import AdicionarEditarRequisicao from '../dialogs/adicionarEditarRequisicao';
+import moment from 'moment';
 
 export const RequisicaoDataTable = () => {
   const { filtrosDataTable, requisicao } = useRequisicaoContext();
@@ -44,9 +45,9 @@ export const RequisicaoDataTable = () => {
             position: index + 1,
             titulo: requisicao.titulo,
             descricao: requisicao.descricao,
-            dataHoraCriada: requisicao.dataHoraCriada,
+            dataHoraCriada: moment(requisicao.dataHoraCriada).utc().format('DD/MM/YYYY HH:mm'),
             status: requisicao.status,
-            prazoAtendimento: requisicao.prazoAtendimento,
+            prazoAtendimento: moment(requisicao.prazoAtendimento).utc().format('DD/MM/YYYY HH:mm'),
             solicitante: requisicao.solicitante?.nome ?? 'Anônimo',
             tipoRequisicao: requisicao.tipoRequisicao?.descricao ?? 'Não informado',
 
