@@ -64,7 +64,6 @@ const useRequisicaoHook = () => {
     removerRequisicao,
     editarRequisicao,
     buscarRequisicao,
-    toastRef,
   };
 };
 

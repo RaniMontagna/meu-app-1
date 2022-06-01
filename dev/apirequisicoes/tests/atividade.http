@@ -1,12 +1,12 @@
 @api = 'http://localhost:3000/api'
 
 # Obter a lista de atividades
-GET {{api}}/api/atividade
+GET {{api}}/atividade
 Content-Type: application/json
 ###
 
 # Inserir novo atividade
-POST {{api}}/api/atividade
+POST {{api}}/atividade
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
 ###
 
 # Alterar atividade
-PUT {{api}}/api/atividade
+PUT {{api}}/atividade
 Content-Type: application/json
 
 {
@@ -36,16 +36,16 @@ Content-Type: application/json
 }
 ###
 # Excluir um atividade
-DELETE {{api}}/api/atividade/623a5f9b6491048851c1b2f0
+DELETE {{api}}/atividade/623a5f9b6491048851c1b2f0
 Content-Type: application/json
 ###
 
 # Obter pelo id de atividade
-GET {{api}}/api/atividade/623a5fc26491048851c1b2f7
+GET {{api}}/atividade/623a5fc26491048851c1b2f7
 Content-Type: application/json
 ###
 
 # Obter atividades filtrando
-GET {{api}}/api/atividade/filtro/Nova
+GET {{api}}/atividade/filtro/Nova
 Content-Type: application/json
 ###

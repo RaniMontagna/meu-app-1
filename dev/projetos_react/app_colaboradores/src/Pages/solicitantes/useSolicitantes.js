@@ -64,7 +64,6 @@ const useSolicitantesHook = () => {
     removerSolicitante,
     editarSolicitante,
     buscarSolicitantes,
-    toastRef,
   };
 };
 

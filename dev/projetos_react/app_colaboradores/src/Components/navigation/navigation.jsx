@@ -12,27 +12,37 @@ const Navigation = () => {
     },
     {
       label: 'Cadastro',
-      icon: 'pi pi-fw pi-file',
+      icon: 'pi pi-plus',
       items: [
         {
           label: 'Colaboradores',
-          icon: 'pi pi-fw pi-user',
+          icon: 'pi pi-users',
           command: () => navigate('/colaboradores'),
         },
         {
           label: 'Solicitantes',
-          icon: 'pi pi-fw pi-user',
+          icon: 'pi pi-users',
           command: () => navigate('/solicitantes'),
         },
         {
           label: 'Tipo de Requisição',
-          icon: 'pi pi-fw pi-user',
+          icon: 'pi pi-box',
           command: () => navigate('/tipoRequisicao'),
         },
         {
           label: 'Requisição',
-          icon: 'pi pi-fw pi-user',
+          icon: 'pi pi-send',
           command: () => navigate('/requisicao'),
+        },
+        {
+          label: 'Andamento',
+          icon: 'pi pi-cloud-download',
+          command: () => navigate('/andamento'),
+        },
+        {
+          label: 'Atividade',
+          icon: 'pi pi-code',
+          command: () => navigate('/atividade'),
         },
       ],
     },

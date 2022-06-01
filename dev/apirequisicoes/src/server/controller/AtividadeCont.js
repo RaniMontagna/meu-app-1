@@ -1,12 +1,12 @@
-const Atividade = require("../model/AtividadeSchema");
+const Atividade = require('../model/AtividadeSchema');
 
 module.exports = {
   listar: async (req, res) => {
     Atividade.find((err, objetos) => {
       err ? res.status(400).send(err) : res.status(200).json(objetos);
     })
-      .populate("colaborador")
-      .populate("andamento")
+      .populate('colaborador')
+      .populate('requisicao')
       .sort({ nome: 1 }); // -1 decrescente 1 crescente
   },
 
@@ -26,7 +26,7 @@ module.exports = {
 
   excluir: async (req, res) => {
     Atividade.deleteOne({ _id: req.params.id }, function (err) {
-      err ? res.status(400).send(err) : res.status(200).json("message:ok");
+      err ? res.status(400).send(err) : res.status(200).json('message:ok');
     });
   },
 
@@ -38,17 +38,14 @@ module.exports = {
         res.status(200).json(obj);
       }
     })
-      .populate("colaborador")
-      .populate("atividade");
+      .populate('colaborador')
+      .populate('atividade');
   },
 
   filtrar: async (req, res) => {
     Atividade.find(
       {
-        $or: [
-          { titulo: { $regex: req.params.filtro } },
-          { descricao: { $regex: req.params.filtro } },
-        ],
+        $or: [{ titulo: { $regex: req.params.filtro } }, { descricao: { $regex: req.params.filtro } }],
       },
       function (err, obj) {
         if (err) {

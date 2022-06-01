@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { RequisicaoProvider } from '../../Context/requisicaoContext';
-
 import RequisicaoDataTable from './requisicaoDataTable/requisicaoDataTable';
 
 const Requisicao = () => {
@@ -13,12 +11,4 @@ const Requisicao = () => {
   );
 };
 
-const RequisicaoWrapper = () => {
-  return (
-    <RequisicaoProvider>
-      <Requisicao />
-    </RequisicaoProvider>
-  );
-};
-
-export default RequisicaoWrapper;
+export default Requisicao;

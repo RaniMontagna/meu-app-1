@@ -124,7 +124,6 @@ export const AdicionarEditarRequisicao = ({ adicionarEditarRequisicao, setAdicio
         </div>
         <div className="form-group" style={{ display: 'flex', flexDirection: 'column' }}>
           <label>Solicitante</label>
-
           <Dropdown
             value={requisicao?.solicitante?._id}
             options={solicitantes}

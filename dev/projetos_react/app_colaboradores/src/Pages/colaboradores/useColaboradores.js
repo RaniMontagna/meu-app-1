@@ -64,7 +64,6 @@ const useColaboradoresHook = () => {
     removerColaborador,
     editarColaborador,
     buscarColaboradores,
-    toastRef,
   };
 };
 
