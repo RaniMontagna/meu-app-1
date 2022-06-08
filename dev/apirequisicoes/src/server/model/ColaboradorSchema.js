@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const ColaboradorSchema = new mongoose.Schema({
   nome: { type: String, required: true },
@@ -6,4 +7,11 @@ const ColaboradorSchema = new mongoose.Schema({
   senha: String,
 });
 
-module.exports = mongoose.model("Colaborador", ColaboradorSchema);
+ColaboradorSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign({ _id: this._id, nome: this.nome }, process.env.JWT_SECRET, {
+    expiresIn: `${process.env.TOKEN_EXPIRE}h`,
+  });
+  return token;
+};
+
+module.exports = mongoose.model('Colaborador', ColaboradorSchema);

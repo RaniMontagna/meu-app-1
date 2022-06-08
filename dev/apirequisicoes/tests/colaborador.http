@@ -1,24 +1,28 @@
-@api = 'http://localhost:3000/api'
+@api = http://localhost:3000/api/colaborador
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmZWYxYjgxMjNhOGFiM2FiZjlhYzciLCJub21lIjoiTHVjYXMiLCJpYXQiOjE2NTQ2NDk0MTIsImV4cCI6MzYwMDAxNjU0NjQ5NDEyfQ.DErliDeSxuHmsgq-07Nd7dWGLJ-QT34NE7GFjbSPql8
 
 # Obter a lista de colaboradores
-GET {{api}}/colaborador
+GET {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Inserir novo colaborador
-POST {{api}}/colaborador
+POST {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "nome": "Lucas", 
- "email": "lucas@upf.br",
+ "email": "lucas2@upf.br",
  "senha": "lucas"
 }
 ###
 
 # Alterar colaborador
-PUT {{api}}/colaborador
+PUT {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "_id": "623a510c72b34b08b610e1fb",
@@ -28,16 +32,19 @@ Content-Type: application/json
 }
 ###
 # Excluir um colaborador
-DELETE {{api}}/colaborador/623a510c72b34b08b610e1fb
+DELETE {{api}}/623a510c72b34b08b610e1fb
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter pelo id de colaborador
-GET {{api}}/colaborador/6231332704433aa1d5eb0e78
+GET {{api}}/6231332704433aa1d5eb0e78
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter colaboradores filtrando
-GET {{api}}/colaborador/filtro/Ranielli
+GET {{api}}/filtro/Ranielli
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###

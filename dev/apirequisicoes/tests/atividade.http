@@ -1,13 +1,16 @@
-@api = 'http://localhost:3000/api'
+@api = http://localhost:3000/api/atividade
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmZWYxYjgxMjNhOGFiM2FiZjlhYzciLCJub21lIjoiTHVjYXMiLCJpYXQiOjE2NTQ2NDk0MTIsImV4cCI6MzYwMDAxNjU0NjQ5NDEyfQ.DErliDeSxuHmsgq-07Nd7dWGLJ-QT34NE7GFjbSPql8
 
 # Obter a lista de atividades
-GET {{api}}/atividade
+GET {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Inserir novo atividade
-POST {{api}}/atividade
+POST {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "titulo": "Nova requisição", 
@@ -21,8 +24,9 @@ Content-Type: application/json
 ###
 
 # Alterar atividade
-PUT {{api}}/atividade
+PUT {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "_id": "623a660ced58e6368c0b0a92",
@@ -36,16 +40,19 @@ Content-Type: application/json
 }
 ###
 # Excluir um atividade
-DELETE {{api}}/atividade/623a5f9b6491048851c1b2f0
+DELETE {{api}}/623a5f9b6491048851c1b2f0
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter pelo id de atividade
-GET {{api}}/atividade/623a5fc26491048851c1b2f7
+GET {{api}}/623a5fc26491048851c1b2f7
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter atividades filtrando
-GET {{api}}/atividade/filtro/Nova
+GET {{api}}/filtro/Nova
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###

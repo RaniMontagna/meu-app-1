@@ -1,13 +1,16 @@
-@api = 'http://localhost:3000/api'
+@api = http://localhost:3000/api/solicitante
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmZWYxYjgxMjNhOGFiM2FiZjlhYzciLCJub21lIjoiTHVjYXMiLCJpYXQiOjE2NTQ2NDk0MTIsImV4cCI6MzYwMDAxNjU0NjQ5NDEyfQ.DErliDeSxuHmsgq-07Nd7dWGLJ-QT34NE7GFjbSPql8
 
 # Obter a lista de solicitantees
-GET {{api}}/solicitante
+GET {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Inserir novo solicitante
-POST {{api}}/solicitante
+POST {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "nome": "Lucas", 
@@ -17,8 +20,9 @@ Content-Type: application/json
 ###
 
 # Alterar solicitante
-PUT {{api}}/solicitante
+PUT {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "_id": "623a510c72b34b08b610e1fb",
@@ -28,16 +32,19 @@ Content-Type: application/json
 }
 ###
 # Excluir um solicitante
-DELETE {{api}}/solicitante/623a510c72b34b08b610e1fb
+DELETE {{api}}/623a510c72b34b08b610e1fb
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter pelo id de solicitante
-GET {{api}}/solicitante/623a57b75d2ec4064fac715e
+GET {{api}}/623a57b75d2ec4064fac715e
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter solicitantees filtrando
-GET {{api}}/solicitante/filtro/Lucas
+GET {{api}}/filtro/Lucas
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###

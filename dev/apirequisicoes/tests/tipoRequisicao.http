@@ -1,13 +1,16 @@
-@api = 'http://localhost:3000/api'
+@api = http://localhost:3000/api/tipoRequisicao
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmZWYxYjgxMjNhOGFiM2FiZjlhYzciLCJub21lIjoiTHVjYXMiLCJpYXQiOjE2NTQ2NDk0MTIsImV4cCI6MzYwMDAxNjU0NjQ5NDEyfQ.DErliDeSxuHmsgq-07Nd7dWGLJ-QT34NE7GFjbSPql8
 
 # Obter a lista de tipos de requisições
-GET {{api}}/tipoRequisicao
+GET {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Inserir novo tipo de requisição
-POST {{api}}/tipoRequisicao
+POST {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "descricao": "POST"
@@ -15,8 +18,9 @@ Content-Type: application/json
 ###
 
 # Alterar requisição
-PUT {{api}}/tipoRequisicao
+PUT {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "_id": "623a5a56e632e1fefd8e7305",
@@ -24,16 +28,19 @@ Content-Type: application/json
 }
 ###
 # Excluir um tipo de requisição
-DELETE {{api}}/tipoRequisicao/623a5a56e632e1fefd8e7305
+DELETE {{api}}/623a5a56e632e1fefd8e7305
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter pelo id do tipo de requisição
-GET {{api}}/tipoRequisicao/623a5a86e632e1fefd8e730e
+GET {{api}}/623a5a86e632e1fefd8e730e
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter requisições por filtro
-GET {{api}}/tipoRequisicao/filtro/POST
+GET {{api}}/filtro/POST
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###

@@ -1,13 +1,16 @@
-@api = 'http://localhost:3000/api'
+@api = http://localhost:3000/api/andamento
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmZWYxYjgxMjNhOGFiM2FiZjlhYzciLCJub21lIjoiTHVjYXMiLCJpYXQiOjE2NTQ2NDk0MTIsImV4cCI6MzYwMDAxNjU0NjQ5NDEyfQ.DErliDeSxuHmsgq-07Nd7dWGLJ-QT34NE7GFjbSPql8
 
 # Obter a lista de andamentos
-GET {{api}}/andamento
+GET {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Inserir novo andamento
-POST {{api}}/andamento
+POST {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "dataHora": "2022-02-25T17:32:25.000Z",
@@ -20,8 +23,9 @@ Content-Type: application/json
 ###
 
 # Alterar andamento
-PUT {{api}}/andamento
+PUT {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "_id": "623a68bcfbb7189d7dfc6ad0",
@@ -34,16 +38,19 @@ Content-Type: application/json
 }
 ###
 # Excluir um andamento
-DELETE {{api}}/andamento/623a5f9b6491048851c1b2f0
+DELETE {{api}}/623a5f9b6491048851c1b2f0
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter pelo id de andamento
-GET {{api}}/andamento/623a68bcfbb7189d7dfc6ad0
+GET {{api}}/623a68bcfbb7189d7dfc6ad0
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter andamentos filtrando
-GET {{api}}/andamento/filtro/Nova
+GET {{api}}/filtro/Nova
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###

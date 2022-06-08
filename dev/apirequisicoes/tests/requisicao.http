@@ -1,13 +1,16 @@
-@api = 'http://localhost:3000/api'
+@api = http://localhost:3000/api/requisicao
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmZWYxYjgxMjNhOGFiM2FiZjlhYzciLCJub21lIjoiTHVjYXMiLCJpYXQiOjE2NTQ2NDk0MTIsImV4cCI6MzYwMDAxNjU0NjQ5NDEyfQ.DErliDeSxuHmsgq-07Nd7dWGLJ-QT34NE7GFjbSPql8
 
 # Obter a lista de requisições
-GET {{api}}/requisicao
+GET {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Inserir novo requisicao
-POST {{api}}/requisicao
+POST {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "titulo": "Nova requisição", 
@@ -22,8 +25,9 @@ Content-Type: application/json
 
 
 # Alterar requisicao
-PUT {{api}}/requisicao
+PUT {{api}}
 Content-Type: application/json
+x-auth-token: {{authToken}}
 
 {
  "_id": "623a5f9b6491048851c1b2f0",
@@ -36,16 +40,19 @@ Content-Type: application/json
 }
 ###
 # Excluir um requisicao
-DELETE {{api}}/requisicao/623a57b75d2ec4064fac715e
+DELETE {{api}}/623a57b75d2ec4064fac715e
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter pelo id de requisicao
-GET {{api}}/requisicao/623a5fc26491048851c1b2f7
+GET {{api}}/623a5fc26491048851c1b2f7
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
 
 # Obter requisições filtrando
-GET {{api}}/requisicao/filtro/Nova
+GET {{api}}/filtro/Nova
 Content-Type: application/json
+x-auth-token: {{authToken}}
 ###
