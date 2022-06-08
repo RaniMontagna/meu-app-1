@@ -43,7 +43,7 @@ export const AndamentoDataTable = () => {
           andamento?.map((andamento, index) => ({
             id: andamento._id,
             position: index + 1,
-            dataHora: moment(andamento?.dataHora).utc().format('DD/MM/YYYY HH:mm'),
+            dataHora: moment(andamento?.dataHora).format('DD/MM/YYYY HH:mm'),
             titulo: andamento?.titulo,
             descricao: andamento?.descricao,
             colaborador: andamento?.colaborador?.nome,

@@ -1,35 +1,40 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
+import { useCallback, useMemo } from 'react';
 import useSolicitantes from '../useSolicitantes';
 
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+import { Message } from 'primereact/message';
+import { useForm } from 'react-hook-form';
+
 export const AdicionarEditarSolicitante = ({ adicionarEditarSolicitante, setAdicionarEditarSolicitante }) => {
-  const [solicitante, setSolicitante] = useState({});
   const { adicionarSolicitante, editarSolicitante } = useSolicitantes();
-
-  useEffect(() => {
-    if (adicionarEditarSolicitante.solicitante) {
-      const solicitante = adicionarEditarSolicitante.solicitante;
-      setSolicitante({ ...solicitante });
-    }
-  }, [adicionarEditarSolicitante]);
-
-  const _handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setSolicitante({ ...solicitante, [name]: value });
-  };
 
   const callBackSucesso = useCallback(() => {
     setAdicionarEditarSolicitante({ open: false });
   }, [setAdicionarEditarSolicitante]);
 
-  const _handleSubmit = () => {
+  const _handleSubmit = (values) => {
     if (adicionarEditarSolicitante.solicitante) {
-      editarSolicitante({ _id: adicionarEditarSolicitante.solicitante._id, ...solicitante }, callBackSucesso);
+      editarSolicitante({ _id: adicionarEditarSolicitante.solicitante._id, ...values }, callBackSucesso);
     } else {
-      adicionarSolicitante(solicitante, callBackSucesso);
+      adicionarSolicitante(values, callBackSucesso);
     }
   };
+
+  const _initialValues = useMemo(() => {
+    const solicitante = adicionarEditarSolicitante.solicitante;
+    if (adicionarEditarSolicitante.solicitante) return solicitante;
+    return {};
+  }, [adicionarEditarSolicitante.solicitante]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: _initialValues,
+  });
 
   return (
     <Dialog
@@ -38,36 +43,66 @@ export const AdicionarEditarSolicitante = ({ adicionarEditarSolicitante, setAdic
       style={{ width: '50vw' }}
       onHide={() => setAdicionarEditarSolicitante({ open: false })}
     >
-      <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <div className="form-group">
+      <form
+        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+        defaultValue={_initialValues}
+        onSubmit={handleSubmit(_handleSubmit)}
+      >
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Nome</label>
-          <input
+          <InputText
             className="form-control"
             type="text"
             name="nome"
-            value={solicitante.nome}
-            onChange={_handleInputChange}
+            {...register('nome', {
+              required: {
+                value: true,
+                message: 'O nome é obrigatório',
+              },
+              maxLength: {
+                value: 50,
+                message: 'O nome deve ter no máximo 50 caracteres',
+              },
+              minLength: {
+                value: 2,
+                message: 'O nome deve ter no mínimo 2 caracteres',
+              },
+            })}
           />
+          <div>{errors.nome && <Message severity="error" text={errors?.nome?.message}></Message>}</div>
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Email</label>
-          <input
+          <InputText
             className="form-control"
-            type="text"
+            type="email"
             name="email"
-            value={solicitante.email}
-            onChange={_handleInputChange}
+            {...register('email', {
+              required: {
+                value: true,
+                message: 'O email é obrigatório',
+              },
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'O email é inválido',
+              },
+            })}
           />
+          <div>{errors.email && <Message severity="error" text={errors?.email?.message}></Message>}</div>
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Senha</label>
-          <input
+          <InputText
             className="form-control"
             type="text"
             name="senha"
-            value={solicitante.senha}
-            onChange={_handleInputChange}
+            {...register('senha', {
+              required: { value: true, message: 'A senha é obrigatório!' },
+              maxLength: { value: 100, message: 'O email pode ter no máximo 100 caracteres!' },
+              minLength: { value: 6, message: 'A senha deve conter no mínimo 6 caracteres!' },
+            })}
           />
+          <div>{errors.senha && <Message severity="error" text={errors?.senha?.message}></Message>}</div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button
@@ -76,7 +111,7 @@ export const AdicionarEditarSolicitante = ({ adicionarEditarSolicitante, setAdic
             onClick={() => setAdicionarEditarSolicitante({ open: false })}
             className="p-button-text"
           />
-          <Button label="Confirmar" icon="pi pi-check" type="button" onClick={_handleSubmit} autoFocus />
+          <Button label="Confirmar" icon="pi pi-check" type="submit" autoFocus />
         </div>
       </form>
     </Dialog>

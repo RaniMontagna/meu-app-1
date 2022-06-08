@@ -1,38 +1,40 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
+import { useCallback, useMemo } from 'react';
 import useTipoRequisicao from '../useTipoRequisicao';
 
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+import { Message } from 'primereact/message';
+import { useForm } from 'react-hook-form';
+
 export const AdicionarEditarTipoRequisicao = ({ adicionarEditarTipoRequisicao, setAdicionarEditarTipoRequisicao }) => {
-  const [tipoRequisicao, setTipoRequisicao] = useState({});
   const { adicionarTipoRequisicao, editarTipoRequisicao } = useTipoRequisicao();
-
-  useEffect(() => {
-    if (adicionarEditarTipoRequisicao.tipoRequisicao) {
-      const tipoRequisicao = adicionarEditarTipoRequisicao.tipoRequisicao;
-      setTipoRequisicao({ ...tipoRequisicao });
-    }
-  }, [adicionarEditarTipoRequisicao]);
-
-  const _handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setTipoRequisicao({ ...tipoRequisicao, [name]: value });
-  };
 
   const callBackSucesso = useCallback(() => {
     setAdicionarEditarTipoRequisicao({ open: false });
   }, [setAdicionarEditarTipoRequisicao]);
 
-  const _handleSubmit = () => {
+  const _handleSubmit = (values) => {
     if (adicionarEditarTipoRequisicao.tipoRequisicao) {
-      editarTipoRequisicao(
-        { _id: adicionarEditarTipoRequisicao.tipoRequisicao._id, ...tipoRequisicao },
-        callBackSucesso
-      );
+      editarTipoRequisicao({ _id: adicionarEditarTipoRequisicao.tipoRequisicao._id, ...values }, callBackSucesso);
     } else {
-      adicionarTipoRequisicao(tipoRequisicao, callBackSucesso);
+      adicionarTipoRequisicao(values, callBackSucesso);
     }
   };
+
+  const _initialValues = useMemo(() => {
+    const tipoRequisicao = adicionarEditarTipoRequisicao.tipoRequisicao;
+    if (adicionarEditarTipoRequisicao.tipoRequisicao) return tipoRequisicao;
+    return {};
+  }, [adicionarEditarTipoRequisicao.tipoRequisicao]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: _initialValues,
+  });
 
   return (
     <Dialog
@@ -41,16 +43,33 @@ export const AdicionarEditarTipoRequisicao = ({ adicionarEditarTipoRequisicao, s
       style={{ width: '50vw' }}
       onHide={() => setAdicionarEditarTipoRequisicao({ open: false })}
     >
-      <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <div className="form-group">
+      <form
+        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+        defaultValue={_initialValues}
+        onSubmit={handleSubmit(_handleSubmit)}
+      >
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Descrição</label>
-          <input
+          <InputText
             className="form-control"
             type="text"
             name="descricao"
-            value={tipoRequisicao.descricao}
-            onChange={_handleInputChange}
+            {...register('descricao', {
+              required: {
+                value: true,
+                message: 'O descrição é obrigatório',
+              },
+              maxLength: {
+                value: 200,
+                message: 'O descrição deve ter no máximo 200 caracteres',
+              },
+              minLength: {
+                value: 2,
+                message: 'O descrição deve ter no mínimo 2 caracteres',
+              },
+            })}
           />
+          <div>{errors.descricao && <Message severity="error" text={errors?.descricao?.message}></Message>}</div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button
@@ -59,7 +78,7 @@ export const AdicionarEditarTipoRequisicao = ({ adicionarEditarTipoRequisicao, s
             onClick={() => setAdicionarEditarTipoRequisicao({ open: false })}
             className="p-button-text"
           />
-          <Button label="Confirmar" icon="pi pi-check" type="button" onClick={_handleSubmit} autoFocus />
+          <Button label="Confirmar" icon="pi pi-check" type="submit" autoFocus />
         </div>
       </form>
     </Dialog>

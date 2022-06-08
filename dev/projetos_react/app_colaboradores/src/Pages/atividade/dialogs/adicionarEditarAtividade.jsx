@@ -1,11 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+/* eslint-disable no-unused-vars */
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import moment from 'moment';
 
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
-import useAtividade from '../useAtividade';
+import { InputText } from 'primereact/inputtext';
+import { Message } from 'primereact/message';
+import { useForm } from 'react-hook-form';
 import { Dropdown } from 'primereact/dropdown';
 
+import useAtividade from '../useAtividade';
 import useRequisicao from '../../../Hooks/useRequisicao';
 import useRequisicaoHook from '../../requisicao/useRequisicao';
 
@@ -13,8 +17,8 @@ import useColaboradores from '../../../Hooks/useColaboradores';
 import useColaboradoresHook from '../../colaboradores/useColaboradores';
 
 export const AdicionarEditarAtividade = ({ adicionarEditarAtividade, setAdicionarEditarAtividade }) => {
-  const [atividade, setAtividade] = useState({});
   const { adicionarAtividade, editarAtividade } = useAtividade();
+  const [_, setAtualizaTela] = useState(false);
 
   const { requisicao } = useRequisicao();
   const { buscarRequisicao } = useRequisicaoHook();
@@ -34,34 +38,44 @@ export const AdicionarEditarAtividade = ({ adicionarEditarAtividade, setAdiciona
     }
   }, [buscarColaboradores, colaboradores.length]);
 
-  useEffect(() => {
-    if (adicionarEditarAtividade.atividade) {
-      const atividade = adicionarEditarAtividade.atividade;
-      setAtividade({ ...atividade });
-    }
-  }, [adicionarEditarAtividade]);
-
-  const _handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setAtividade({ ...atividade, [name]: value });
-  };
-
   const callBackSucesso = useCallback(() => {
     setAdicionarEditarAtividade({ open: false });
   }, [setAdicionarEditarAtividade]);
 
-  const _handleSubmit = () => {
+  const _handleSubmit = (values) => {
     if (adicionarEditarAtividade.atividade) {
-      editarAtividade({ _id: adicionarEditarAtividade.atividade._id, ...atividade }, callBackSucesso);
+      editarAtividade({ _id: adicionarEditarAtividade.atividade._id, ...values }, callBackSucesso);
     } else {
-      adicionarAtividade(atividade, callBackSucesso);
+      adicionarAtividade(values, callBackSucesso);
     }
   };
 
   const _formatDate = (data) => {
-    const dataFormatada = moment(data).utc().format('YYYY-MM-DDTHH:mm');
+    const dataFormatada = moment(data).format('YYYY-MM-DDTHH:mm');
     return dataFormatada;
   };
+
+  const _initialValues = useMemo(() => {
+    const atividade = adicionarEditarAtividade.atividade;
+    if (adicionarEditarAtividade.atividade)
+      return {
+        ...atividade,
+        prazo: _formatDate(atividade.prazo),
+        agendaInicio: _formatDate(atividade.agendaInicio),
+        dataHoraTermino: _formatDate(atividade.dataHoraTermino),
+      };
+    return {};
+  }, [adicionarEditarAtividade.atividade]);
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: _initialValues,
+  });
 
   return (
     <Dialog
@@ -69,95 +83,161 @@ export const AdicionarEditarAtividade = ({ adicionarEditarAtividade, setAdiciona
       visible={adicionarEditarAtividade.open}
       style={{ width: '50vw' }}
       onHide={() => setAdicionarEditarAtividade({ open: false })}
+      defaultValue={_initialValues}
+      onSubmit={handleSubmit(_handleSubmit)}
     >
       <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <div className="form-group">
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Titulo</label>
-          <input
+          <InputText
             className="form-control"
             type="text"
             name="titulo"
-            value={atividade.titulo}
-            onChange={_handleInputChange}
+            {...register('titulo', {
+              required: {
+                value: true,
+                message: 'O titulo é obrigatório',
+              },
+              maxLength: {
+                value: 50,
+                message: 'O titulo deve ter no máximo 50 caracteres',
+              },
+              minLength: {
+                value: 2,
+                message: 'O titulo deve ter no mínimo 2 caracteres',
+              },
+            })}
           />
+          <div>{errors.titulo && <Message severity="error" text={errors?.titulo?.message}></Message>}</div>
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Descrição</label>
-          <input
+          <InputText
             className="form-control"
             type="text"
             name="descricao"
-            value={atividade.descricao}
-            onChange={_handleInputChange}
+            {...register('descricao', {
+              required: {
+                value: true,
+                message: 'O descrição é obrigatório',
+              },
+              maxLength: {
+                value: 200,
+                message: 'O descrição deve ter no máximo 200 caracteres',
+              },
+              minLength: {
+                value: 2,
+                message: 'O descrição deve ter no mínimo 2 caracteres',
+              },
+            })}
           />
+          <div>{errors.descricao && <Message severity="error" text={errors?.descricao?.message}></Message>}</div>
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Status</label>
-          <input
+          <InputText
             className="form-control"
             type="text"
             name="status"
-            value={atividade.status}
-            onChange={_handleInputChange}
+            {...register('status', {
+              required: {
+                value: true,
+                message: 'O status é obrigatório',
+              },
+              maxLength: {
+                value: 20,
+                message: 'O status deve ter no máximo 20 caracteres',
+              },
+              minLength: {
+                value: 2,
+                message: 'O status deve ter no mínimo 2 caracteres',
+              },
+            })}
           />
+          <div>{errors.status && <Message severity="error" text={errors?.status?.message}></Message>}</div>
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Prazo</label>
-          <input
+          <InputText
             className="form-control"
             type="datetime-local"
             name="prazo"
-            value={atividade.prazo && _formatDate(atividade.prazo)}
-            onChange={_handleInputChange}
+            {...register('prazo', {
+              required: {
+                value: true,
+                message: 'O prazo é obrigatório',
+              },
+            })}
           />
+          <div>{errors.prazo && <Message severity="error" text={errors?.prazo?.message}></Message>}</div>
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Agenda Ínicio</label>
-          <input
+          <InputText
             className="form-control"
             type="datetime-local"
             name="agendaInicio"
-            value={atividade.agendaInicio && _formatDate(atividade.agendaInicio)}
-            onChange={_handleInputChange}
+            {...register('agendaInicio', {
+              required: {
+                value: true,
+                message: 'Inicio da agenda é obrigatório',
+              },
+            })}
           />
+          <div>{errors.agendaInicio && <Message severity="error" text={errors?.agendaInicio?.message}></Message>}</div>
         </div>
-        <div className="form-group">
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Data Término</label>
-          <input
+          <InputText
             className="form-control"
             type="datetime-local"
             name="dataHoraTermino"
-            value={atividade.dataHoraTermino && _formatDate(atividade.dataHoraTermino)}
-            onChange={_handleInputChange}
+            {...register('dataHoraTermino')}
           />
         </div>
-        <div className="form-group" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Requisições</label>
           <Dropdown
-            value={atividade?.requisicao?._id}
+            value={getValues()?.requisicao?._id}
             options={requisicao}
             optionValue="_id"
             optionLabel="titulo"
-            onChange={(e) => {
-              const r = requisicao.find((requisicao) => requisicao._id === e.value);
-              setAtividade((current) => ({ ...current, requisicao: r }));
-            }}
-            placeholder="Selecione uma atividade"
+            {...register('requisicao', {
+              required: {
+                value: true,
+                message: 'O tipo de requisição é obrigatório',
+              },
+              onChange: (e) => {
+                const r = requisicao.find((requisicao) => requisicao._id === e.value);
+                setValue('requisicao', r);
+                setAtualizaTela((current) => !current);
+              },
+            })}
+            placeholder="Selecione uma requisição"
           />
+          <div>{errors.requisicao && <Message severity="error" text={errors?.requisicao?.message}></Message>}</div>
         </div>
-        <div className="form-group" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <label>Colaboradores</label>
           <Dropdown
-            value={atividade?.colaborador?._id}
+            value={getValues()?.colaborador?._id}
             options={colaboradores}
             optionValue="_id"
             optionLabel="nome"
-            onChange={(e) => {
-              const colaborador = colaboradores.find((colaborador) => colaborador._id === e.value);
-              setAtividade((current) => ({ ...current, colaborador }));
-            }}
-            placeholder="Seleciona uma requisição"
+            {...register('colaborador', {
+              required: {
+                value: true,
+                message: 'O tipo de colaborador é obrigatório',
+              },
+              onChange: (e) => {
+                const colaborador = colaboradores.find((colaborador) => colaborador._id === e.value);
+                setValue('colaborador', colaborador);
+                setAtualizaTela((current) => !current);
+              },
+            })}
+            placeholder="Seleciona um colaborador"
           />
+          <div>{errors.colaborador && <Message severity="error" text={errors?.colaborador?.message}></Message>}</div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button
@@ -166,7 +246,7 @@ export const AdicionarEditarAtividade = ({ adicionarEditarAtividade, setAdiciona
             onClick={() => setAdicionarEditarAtividade({ open: false })}
             className="p-button-text"
           />
-          <Button label="Confirmar" icon="pi pi-check" type="button" onClick={_handleSubmit} autoFocus />
+          <Button label="Confirmar" icon="pi pi-check" type="submit" autoFocus />
         </div>
       </form>
     </Dialog>

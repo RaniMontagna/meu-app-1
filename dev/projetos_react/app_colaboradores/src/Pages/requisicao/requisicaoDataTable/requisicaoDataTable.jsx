@@ -45,9 +45,9 @@ export const RequisicaoDataTable = () => {
             position: index + 1,
             titulo: requisicao.titulo,
             descricao: requisicao.descricao,
-            dataHoraCriada: moment(requisicao.dataHoraCriada).utc().format('DD/MM/YYYY HH:mm'),
+            dataHoraCriada: moment(requisicao.dataHoraCriada).format('DD/MM/YYYY HH:mm'),
             status: requisicao.status,
-            prazoAtendimento: moment(requisicao.prazoAtendimento).utc().format('DD/MM/YYYY HH:mm'),
+            prazoAtendimento: moment(requisicao.prazoAtendimento).format('DD/MM/YYYY HH:mm'),
             solicitante: requisicao.solicitante?.nome ?? 'Anônimo',
             tipoRequisicao: requisicao.tipoRequisicao?.descricao ?? 'Não informado',
 
