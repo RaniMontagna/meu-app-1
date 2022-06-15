@@ -1,10 +1,11 @@
-import api from '../../Services/api';
+import { useHelper } from '../../Services/api';
 import useApp from '../../Hooks/useApp';
 import useAtividade from '../../Hooks/useAtividade';
 
 const useAtividadeHook = () => {
   const { toastRef } = useApp();
   const { setAtividade } = useAtividade();
+  const { api } = useHelper();
 
   // Busca atividade
   const buscarAtividade = async () => {

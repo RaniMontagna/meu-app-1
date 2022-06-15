@@ -1,10 +1,16 @@
 import axios from 'axios';
+import useApp from '../Hooks/useApp';
 
-const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  headers: {
-    'Content-type': 'application/json',
-  },
-});
+export const useHelper = () => {
+  const { token } = useApp();
 
-export default api;
+  const api = axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+    headers: {
+      'Content-type': 'application/json',
+      'x-auth-token': token,
+    },
+  });
+
+  return { api };
+};

@@ -1,10 +1,11 @@
-import api from '../../Services/api';
+import { useHelper } from '../../Services/api';
 import useApp from '../../Hooks/useApp';
 import useAndamento from '../../Hooks/useAndamento';
 
 const useAndamentoHook = () => {
   const { toastRef } = useApp();
   const { setAndamento } = useAndamento();
+  const { api } = useHelper();
 
   // Busca andamento
   const buscarAndamento = async () => {

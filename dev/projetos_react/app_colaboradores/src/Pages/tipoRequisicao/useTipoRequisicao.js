@@ -1,10 +1,11 @@
-import api from '../../Services/api';
+import { useHelper } from '../../Services/api';
 import useApp from '../../Hooks/useApp';
 import useTipoRequisicao from '../../Hooks/useTipoRequisicao';
 
 const useTipoRequisicaoHook = () => {
   const { toastRef } = useApp();
   const { setTipoRequisicao } = useTipoRequisicao();
+  const { api } = useHelper();
 
   // Busca tipo de requisição
   const buscarTipoRequisicao = async () => {

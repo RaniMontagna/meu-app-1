@@ -1,10 +1,11 @@
-import api from '../../Services/api';
+import { useHelper } from '../../Services/api';
 import useApp from '../../Hooks/useApp';
 import useColaboradores from '../../Hooks/useColaboradores';
 
 const useColaboradoresHook = () => {
   const { toastRef } = useApp();
   const { setColaboradores } = useColaboradores();
+  const { api } = useHelper();
 
   // Busca colaboradores
   const buscarColaboradores = async () => {

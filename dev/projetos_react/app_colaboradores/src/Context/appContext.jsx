@@ -5,9 +5,10 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const toastRef = useRef();
+  const [token, setToken] = React.useState(sessionStorage.getItem('token'));
 
   return (
-    <AppContext.Provider value={{ toastRef }}>
+    <AppContext.Provider value={{ toastRef, token, setToken }}>
       {children}
       <Toast ref={toastRef} />
     </AppContext.Provider>

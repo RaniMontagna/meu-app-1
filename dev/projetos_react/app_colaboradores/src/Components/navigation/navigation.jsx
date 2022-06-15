@@ -1,8 +1,10 @@
 import { Menubar } from 'primereact/menubar';
 import { useNavigate } from 'react-router-dom';
+import useApp from '../../Hooks/useApp';
 
 const Navigation = () => {
   const navigate = useNavigate();
+  const { toastRef, setToken } = useApp();
 
   const items = [
     {
@@ -49,6 +51,11 @@ const Navigation = () => {
     {
       label: 'Sair',
       icon: 'pi pi-fw pi-power-off',
+      command: () => {
+        sessionStorage.removeItem('token');
+        setToken(null);
+        toastRef.current.show({ severity: 'success', summary: 'Deslogado com sucesso', life: 3000 });
+      },
     },
   ];
 

@@ -1,10 +1,11 @@
-import api from '../../Services/api';
+import { useHelper } from '../../Services/api';
 import useApp from '../../Hooks/useApp';
 import useRequisicao from '../../Hooks/useRequisicao';
 
 const useRequisicaoHook = () => {
   const { toastRef } = useApp();
   const { setRequisicao } = useRequisicao();
+  const { api } = useHelper();
 
   // Busca requisições
   const buscarRequisicao = async () => {
